@@ -1,0 +1,29 @@
+@gap: 15px;
+.create-note-form {
+  margin-top: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: @gap;
+  .input-title {
+    width: 400px;
+  }
+  .editor {
+    // background: #4b544b;
+    border-radius: var(--border-radius);
+    border: 1px solid #383838;
+    &:hover {
+      border-color: #81C784;
+    }
+  }
+  .focus {
+    outline: 0 none;
+    outline-offset: 0;
+    box-shadow: 0 0 0 1px #a7d8a9;
+    border-color: #81C784;
+  }
+  .btns-wrapper {
+    display: flex;
+    gap: @gap;
+  }
+}
+
