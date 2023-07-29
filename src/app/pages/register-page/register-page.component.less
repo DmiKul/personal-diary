@@ -1,0 +1,27 @@
+.register-page__container {
+  display: flex;
+  justify-content: center;
+}
+.register-form {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 300px;
+  margin-top: 30px;
+}
+.title {
+  text-align: center;
+}
+// :host ::ng-deep .p-button{
+// }
+.btns-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+:host ::ng-deep .p-button {
+  width: calc((300px - 15px) / 2);
+}
+:host ::ng-deep .p-password, :host ::ng-deep .p-inputtext, input {
+  width: 100%;
+}

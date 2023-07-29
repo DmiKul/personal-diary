@@ -8,6 +8,8 @@ import Header from '@editorjs/header';
 // import Paragraph from '@editorjs/paragraph';
 import createGenericInlineTool, {
 } from 'editorjs-inline-tool'
+import { Router } from '@angular/router';
+
 
 
 @Component({
@@ -54,5 +56,11 @@ export class CreateNotePageComponent {
   });
 
   isFocused: boolean = false;
+
+  constructor(private router: Router) {}
+
+  backToNotes() {
+    this.router.navigate([''])
+  }
 
 }

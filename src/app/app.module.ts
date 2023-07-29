@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { CreateNotePageModule } from './pages/create-note-page/create-note-page.module';
 import { NotesPageModule } from './pages/notes-page/notes-page.module';
+import { LoginPageModule } from './pages/login-page/login-page.module';
+import { RegisterPageModule } from './pages/register-page/register-page.module';
 
 @NgModule({
   declarations: [
@@ -16,7 +18,9 @@ import { NotesPageModule } from './pages/notes-page/notes-page.module';
     AppRoutingModule,
     LayoutModule,
     CreateNotePageModule,
-    NotesPageModule
+    NotesPageModule,
+    LoginPageModule,
+    RegisterPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,0 +1,12 @@
+<div class="container register-page__container">
+  <div class="register-form">
+    <h2 class="title">Регистрация</h2>
+    <input type="text" pInputText placeholder="Введите электронную почту"/>
+    <p-password [toggleMask]="true" placeholder="Придумайте пароль"></p-password>
+    <p-password [toggleMask]="true" placeholder="Подтвердите пароль"></p-password>
+    <div class="btns-wrapper">
+      <p-button label="Готово"></p-button>
+      <p-button label="Назад" (click)="backToLogin()"></p-button>
+    </div>
+  </div>
+</div>
