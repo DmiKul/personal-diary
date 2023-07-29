@@ -5,7 +5,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LayoutModule } from './layout/layout.module';
 import { CreateNotePageModule } from './pages/create-note-page/create-note-page.module';
-
+import { NotesPageModule } from './pages/notes-page/notes-page.module';
 
 @NgModule({
   declarations: [
@@ -15,7 +15,8 @@ import { CreateNotePageModule } from './pages/create-note-page/create-note-page.
     BrowserModule,
     AppRoutingModule,
     LayoutModule,
-    CreateNotePageModule
+    CreateNotePageModule,
+    NotesPageModule
   ],
   providers: [],
   bootstrap: [AppComponent]
