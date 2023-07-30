@@ -1,8 +1,7 @@
 <div class="container">
   <div class="create-note-form">
     <input type="text" id="title" class="input-title" placeholder="Название" pInputText/>
-    <!-- <div id="editorjs" tabindex="0" (focus)="isFocused = true" (blur)="isFocused = false" [ngClass]="{'editor': true, 'focus': isFocused}"></div> -->
-    <div id="editorjs" class="editor"></div>
+    <app-editor></app-editor>
     <div class="btns-wrapper">
       <p-button label="Готово"></p-button>
       <p-button label="Назад" (click)="backToNotes()"></p-button>

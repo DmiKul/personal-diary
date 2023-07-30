@@ -1,0 +1,41 @@
+.editor {
+  border-radius: var(--border-radius);
+  border: 1px solid #ced4da;
+  &:hover {
+    border-color: var(--primary-color);
+  }
+  &:focus-visible {
+    outline: none;
+  }
+}
+.focus {
+  // outline: 0 none;
+  // outline-offset: 0;
+  box-shadow: 0 0 0 0.2rem #DDD6FE;
+  border-color: #8B5CF6;
+}
+// :host ::ng-deep .ce-block__content {
+//   margin: 0 60px;
+// }
+// :host ::ng-deep .ce-toolbar__content {
+//   max-width: 870px;
+// }
+:host ::ng-deep .ce-inline-toolbar__dropdown {
+  margin-right: 0;
+  &:hover {
+    border-radius: 6px 0 0 6px;
+  }
+}
+:host ::ng-deep .ce-inline-toolbar__toggler-and-button-wrapper {
+  padding-right: 0;
+}
+:host ::ng-deep .ce-inline-tool:nth-child(n + 4) {
+  border-radius: 0 6px 6px 0;
+  padding: 0 2px;
+}
+:host ::ng-deep .ce-paragraph {
+  padding: 12px 0;
+}
+:host ::ng-deep .codex-editor__redactor {
+  padding: 40px 0 122px 0 !important;
+}
