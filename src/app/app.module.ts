@@ -8,6 +8,9 @@ import { CreateNotePageModule } from './pages/create-note-page/create-note-page.
 import { NotesPageModule } from './pages/notes-page/notes-page.module';
 import { LoginPageModule } from './pages/login-page/login-page.module';
 import { RegisterPageModule } from './pages/register-page/register-page.module';
+import { IndexedDBService } from './api/indexed-db.service';
+import { UserService } from './api/user.service';
+import { NoteService } from './api/note.service';
 
 @NgModule({
   declarations: [
@@ -21,9 +24,8 @@ import { RegisterPageModule } from './pages/register-page/register-page.module';
     CreateNotePageModule,
     NotesPageModule,
     LoginPageModule,
-    RegisterPageModule
   ],
-  providers: [],
+  providers: [IndexedDBService, UserService, NoteService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
