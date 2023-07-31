@@ -8,6 +8,7 @@ import { IUser } from '../types/models';
 })
 export class UserService {
   private readonly storeName = 'users';
+  users!: IUser[]
 
   constructor(private indexedDBService: IndexedDBService) { }
 
@@ -66,5 +67,14 @@ export class UserService {
         reject(request.result)
       };
     })
+  }
+
+  async isLoginDataCorrect(email: string, password: string) {
+    // this.getAllUsers().then(users => {
+    //   this.users = users
+    // })
+    this.users = await this.getAllUsers()
+    let isLoginDataCorrect = this.users.some(user => user.email === email && user.password === password);
+    return isLoginDataCorrect;
   }
 }

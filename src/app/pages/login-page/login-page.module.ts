@@ -4,6 +4,7 @@ import { LoginPageComponent } from './login-page.component';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -13,7 +14,8 @@ import { PasswordModule } from 'primeng/password';
     CommonModule,
     ButtonModule,
     InputTextModule,
-    PasswordModule
+    PasswordModule,
+    ReactiveFormsModule
   ],
   exports: [LoginPageComponent]
 })
