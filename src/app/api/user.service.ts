@@ -73,6 +73,7 @@ export class UserService {
     // this.getAllUsers().then(users => {
     //   this.users = users
     // })
+    console.log('check login data')
     this.users = await this.getAllUsers()
     let isLoginDataCorrect = this.users.some(user => user.email === email && user.password === password);
     return isLoginDataCorrect;

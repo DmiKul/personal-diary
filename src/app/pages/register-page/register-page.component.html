@@ -1,9 +1,99 @@
 <div class="container register-page__container">
-  <form class="register-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+  <form
+    class="register-form"
+    [formGroup]="registerForm"
+    (ngSubmit)="onSubmit()"
+  >
     <h2 class="title">Регистрация</h2>
-    <input type="text" pInputText placeholder="Введите электронную почту" formControlName="email"/>
-    <p-password [toggleMask]="true" placeholder="Придумайте пароль" formControlName="password"></p-password>
-    <p-password [toggleMask]="true" placeholder="Подтвердите пароль" formControlName="passwordConfirm"></p-password>
+    <div class="email-wrapper">
+      <input
+        type="email"
+        pInputText
+        placeholder="Введите электронную почту"
+        formControlName="email"
+        required="true"
+        [ngClass]="{
+          invalid:
+            (_email?.invalid &&
+              (_email?.touched || _email?.dirty || isFormSubmitted)) ||
+            !isEmailFree
+        }"
+      />
+      <div
+        *ngIf="
+          _email?.invalid &&
+          (_email?.touched || _email?.dirty || isFormSubmitted) || !isEmailFree
+        "
+      >
+        <div *ngIf="_email?.errors?.['required']" class="invalid-message">
+          Поле не заполнено
+        </div>
+        <div *ngIf="_email?.errors?.['email']" class="invalid-message">
+          Email введен некорректно
+        </div>
+        <div *ngIf="!_email?.errors?.['required'] && !isEmailFree" class="invalid-message">
+          Пользователь с таким email уже зарегестрирован
+        </div>
+      </div>
+    </div>
+    <div class="password-wrapper">
+      <p-password
+        [toggleMask]="true"
+        placeholder="Придумайте пароль"
+        formControlName="password"
+        required="true"
+        minlength="5"
+        [ngClass]="{
+          invalid:
+            _password?.invalid &&
+            (_password?.touched || _password?.dirty || isFormSubmitted)
+        }"
+      ></p-password>
+      <div
+        *ngIf="
+          _password?.invalid &&
+          (_password?.touched || _password?.dirty || isFormSubmitted)
+        "
+      >
+        <div *ngIf="_password?.errors?.['required']" class="invalid-message">
+          Поле не заполнено
+        </div>
+        <div *ngIf="_password?.errors?.['minlength']" class="invalid-message">
+          Минимальная длина - 5 символов
+        </div>
+      </div>
+    </div>
+    <div class="password-wrapper">
+      <p-password
+        [toggleMask]="true"
+        [feedback]="false"
+        placeholder="Подтвердите пароль"
+        formControlName="passwordConfirm"
+        required="true"
+        [ngClass]="{
+          invalid: _passwordConfirm?.invalid && (_passwordConfirm?.touched || _passwordConfirm?.dirty || isFormSubmitted) || registerForm.errors?.['notSame']
+        }"
+      ></p-password>
+      <div
+        *ngIf="
+          _passwordConfirm?.invalid &&
+          (_passwordConfirm?.touched || _passwordConfirm?.dirty || isFormSubmitted)
+        "
+      >
+        <div
+          *ngIf="_passwordConfirm?.errors?.['required']"
+          class="invalid-message"
+        >
+          Поле не заполнено
+        </div>
+      </div>
+      <div
+        *ngIf="!_passwordConfirm?.errors?.['required'] && registerForm?.errors?.['notSame']"
+        class="invalid-message"
+      >
+        Пароли не совпадают
+      </div>
+    </div>
     <div class="btns-wrapper">
       <p-button label="Готово" type="submit"></p-button>
       <p-button label="Назад" (click)="backToLogin()"></p-button>
