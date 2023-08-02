@@ -11,8 +11,8 @@ import { IUser } from 'src/app/types/models';
 })
 export class RegisterPageComponent {
   registerForm!: FormGroup;
-  isFormSubmitted: Boolean = false
-  isEmailFree: Boolean = true
+  isFormSubmitted: boolean = false
+  isEmailFree: boolean = true
 
   constructor(
     private fb: FormBuilder,

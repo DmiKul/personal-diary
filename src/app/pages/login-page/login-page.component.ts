@@ -7,6 +7,7 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/api/user.service';
+import { IsAuthorizedService } from 'src/app/shared/services/is-authorized.service';
 
 @Component({
   selector: 'app-login-page',
@@ -15,13 +16,14 @@ import { UserService } from 'src/app/api/user.service';
 })
 export class LoginPageComponent {
   loginForm!: FormGroup;
-  isLoginDataCorrect: Boolean = true
-  isFormSubmitted: Boolean = false
+  isLoginDataCorrect: boolean = true
+  isFormSubmitted: boolean = false
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private isAuthorizedService: IsAuthorizedService
   ) {
     this._createForm();
   }
@@ -61,11 +63,12 @@ export class LoginPageComponent {
       );
       if (this.isLoginDataCorrect) {
         this.router.navigate(['']);
+        this.isAuthorizedService.setIsAuthorized(true)
       }
     }
   }
 
-  // isValid(): Boolean {
+  // isValid(): boolean {
   //   this.isEmailFilled = !(
   //     this.loginForm.controls.email.errors !== null &&
   //     this.loginForm.controls.email.errors.hasOwnProperty('required')
