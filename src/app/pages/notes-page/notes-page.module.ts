@@ -14,4 +14,5 @@ import { ImageModule } from 'primeng/image';
   ],
   exports: [NotesPageComponent]
 })
-export class NotesPageModule { }
+export class NotesPageModule {
+}

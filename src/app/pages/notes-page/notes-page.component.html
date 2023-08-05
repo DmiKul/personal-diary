@@ -1,8 +1,7 @@
 <div class="container notes-page__container">
   <p-button class="btn" label="Добавить запись" (click)="addNote()"></p-button>
-  <div class="notes-wrapper">
-    <app-note></app-note>
-    <app-note></app-note>
-    <app-note></app-note>
+  <div class="notes-wrapper" *ngIf="!isLoading">
+    <app-note *ngFor="let note of notes" [note]="note"></app-note>
   </div>
+    <!-- todo: add loading loader -->
 </div>
