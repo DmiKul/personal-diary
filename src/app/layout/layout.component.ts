@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { IsAuthorizedService } from '../shared/services/is-authorized.service';
+import { AuthService } from '@shared/services/auth.service';
 
 @Component({
   selector: 'app-layout',
@@ -10,13 +11,14 @@ import { IsAuthorizedService } from '../shared/services/is-authorized.service';
 export class LayoutComponent {
   isAuthorized!: boolean
 
-  constructor(private router: Router, private isAuthorizedService: IsAuthorizedService) {
+  constructor(private router: Router, private auth: AuthService, private isAuthorizedService: IsAuthorizedService) {
     this.isAuthorizedService.getIsAuthorized().subscribe(isAuthorized => this.isAuthorized = isAuthorized)
     console.log(this.isAuthorized)
   }
 
-  logOut(): void {
+  logout(): void {
     this.router.navigate(['login'])
+    this.auth.logout()
     this.isAuthorizedService.setIsAuthorized(false)
   }
 }
