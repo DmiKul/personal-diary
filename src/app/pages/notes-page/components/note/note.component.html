@@ -1,13 +1,24 @@
 <div class="note">
   <div class="header">
-    <h2 class="title">Заголовок</h2>
+    <h2 class="title">{{note.title}}</h2>
     <div class="btns-wrapper">
-      <p-button icon="pi pi-file-edit" label=""></p-button>
-      <p-button icon="pi pi-times" label=""></p-button>
+      <p-button icon="pi pi-file-edit" label="" (click)="editNote()"></p-button>
+      <p-button icon="pi pi-trash" label="" (click)="deleteNote()"></p-button>
     </div>
   </div>
   <div class="text-image-wrapper">
-    <p class="text">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Hic, ea sint ratione consequatur, architecto ipsa odio vero minima amet ut rerum doloremque dignissimos nihil atque deleniti, aliquam dicta? Eligendi, nisi aliquam nesciunt, ipsum labore ea quam culpa facere obcaecati unde rem est repudiandae vero maxime soluta neque dolore eius nam vel. Numquam odit repellat est? Numquam accusantium molestias maxime nemo.</p>
+    <div class="text-wrapper">
+      <!-- <div class="block" *ngFor="let block of note.body.blocks" [innerHTML]="block"></div> -->
+      <div class="block" *ngFor="let block of note.body.blocks; let i = index;">
+        <p *ngIf="block.type == 'paragraph'" [innerHTML]="html[i]"></p>
+        <h1 *ngIf="block.type == 'header' && block.data.level == 1" [innerHTML]="html[i]"></h1>
+        <h2 *ngIf="block.type == 'header' && block.data.level == 2" [innerHTML]="html[i]"></h2>
+        <h3 *ngIf="block.type == 'header' && block.data.level == 3" [innerHTML]="html[i]"></h3>
+        <h4 *ngIf="block.type == 'header' && block.data.level == 4" [innerHTML]="html[i]"></h4>
+        <h5 *ngIf="block.type == 'header' && block.data.level == 5" [innerHTML]="html[i]"></h5>
+        <h6 *ngIf="block.type == 'header' && block.data.level == 6" [innerHTML]="html[i]"></h6>
+      </div>
+    </div>
     <!-- <img class="image" src="https://fakeimg.pl/200x200/?text=Hello" alt=""> -->
     <p-image src="https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg" alt="Image" width="250" [preview]="true"></p-image>
   </div>
