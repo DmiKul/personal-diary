@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
-import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/api/user.service';
-import { IUser } from 'src/app/types/models';
+import { AuthService } from '@shared/services/auth.service';
 
 @Component({
   selector: 'app-register-page',
@@ -17,7 +16,7 @@ export class RegisterPageComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private userService: UserService
+    private auth: AuthService
   ) {
     this._createForm();
   }
@@ -25,7 +24,7 @@ export class RegisterPageComponent {
   private _createForm() {
     this.registerForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required, Validators.minLength(5)]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
       passwordConfirm: ['', [Validators.required]], //validator для совпадения паролей
     }, {
       validators: [this.checkPasswords]
@@ -59,23 +58,9 @@ export class RegisterPageComponent {
   onSubmit() {
     this.isFormSubmitted = true
     console.log(this.registerForm);
-    //проверка, свободен ли email
     const email: string = this._email?.value || '';
     const password: string = this._password?.value || '';
-    const user: IUser = {
-      email: email,
-      password: password,
-    };
-    this.userService.isEmailFree(email).then((isEmailFree) => {
-      if (isEmailFree) {
-        this.isEmailFree = true
-        this.userService.addUser(user);
-        this.router.navigate([''])
-      } else {
-        this.isEmailFree = false
-        console.log('пользователь с таким email уже зарегестрирован');
-      }
-    });
+    this.auth.register(email, password)
   }
 
   backToLogin(): void {
