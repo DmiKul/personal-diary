@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "personal-diary-cbdfa"
+  },
+  "targets": {
+    "personal-diary-cbdfa": {
+      "hosting": {
+        "personal-diary": [
+          "personal-diary-cbdfa"
+        ]
+      }
+    }
+  }
+}

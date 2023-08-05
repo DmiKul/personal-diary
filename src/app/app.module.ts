@@ -8,9 +8,12 @@ import { CreateNotePageModule } from './pages/create-note-page/create-note-page.
 import { NotesPageModule } from './pages/notes-page/notes-page.module';
 import { LoginPageModule } from './pages/login-page/login-page.module';
 import { RegisterPageModule } from './pages/register-page/register-page.module';
-import { IndexedDBService } from './api/indexed-db.service';
-import { UserService } from './api/user.service';
-import { NoteService } from './api/note.service';
+import { AngularFireModule} from '@angular/fire/compat'
+import { AuthService } from '@shared/services/auth.service';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideAuth,getAuth } from '@angular/fire/auth';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 @NgModule({
   declarations: [
@@ -20,12 +23,17 @@ import { NoteService } from './api/note.service';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    AngularFireModule.initializeApp(environment.firebase),
     LayoutModule,
     CreateNotePageModule,
     NotesPageModule,
     LoginPageModule,
+    RegisterPageModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore())
   ],
-  providers: [IndexedDBService, UserService, NoteService],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
