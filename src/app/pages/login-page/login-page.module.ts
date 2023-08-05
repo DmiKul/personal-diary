@@ -4,7 +4,6 @@ import { LoginPageComponent } from './login-page.component';
 import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
-import { RadioButtonModule } from 'primeng/radiobutton';
 import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
@@ -15,7 +14,6 @@ import { ReactiveFormsModule } from '@angular/forms';
     InputTextModule,
     PasswordModule,
     ReactiveFormsModule,
-    RadioButtonModule,
   ],
   exports: [LoginPageComponent]
 })

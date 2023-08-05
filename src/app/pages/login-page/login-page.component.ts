@@ -1,12 +1,11 @@
 import { Component } from '@angular/core';
 import {
   FormBuilder,
-  FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UserService } from 'src/app/api/user.service';
+import { AuthService } from '@shared/services/auth.service';
 import { IsAuthorizedService } from 'src/app/shared/services/is-authorized.service';
 
 @Component({
@@ -22,8 +21,7 @@ export class LoginPageComponent {
   constructor(
     private fb: FormBuilder,
     private router: Router,
-    private userService: UserService,
-    private isAuthorizedService: IsAuthorizedService
+    private auth: AuthService
   ) {
     this._createForm();
   }
@@ -51,50 +49,13 @@ export class LoginPageComponent {
     this.router.navigate(['register']);
   }
 
-  async onSubmit() {
+  onSubmit() {
     this.isFormSubmitted = true
     console.log(this.loginForm);
     if (this.loginForm.status == 'VALID') {
       const email: string = this._email?.value || '';
       const password: string = this._password?.value || '';
-      this.isLoginDataCorrect = await this.userService.isLoginDataCorrect(
-        email,
-        password
-      );
-      if (this.isLoginDataCorrect) {
-        this.router.navigate(['']);
-        this.isAuthorizedService.setIsAuthorized(true)
-      }
+      this.auth.login(email, password)
     }
   }
-
-  // isValid(): boolean {
-  //   this.isEmailFilled = !(
-  //     this.loginForm.controls.email.errors !== null &&
-  //     this.loginForm.controls.email.errors.hasOwnProperty('required')
-  //   );
-  //   this.isPasswordFilled = !(
-  //     this.loginForm.controls.password.errors !== null &&
-  //     this.loginForm.controls.password.errors.hasOwnProperty('required')
-  //   );
-  //   if (!this.isEmailFilled) {
-  //     console.log('email is not filled');
-  //   }
-  //   if (!this.isPasswordFilled) {
-  //     console.log('password is not filled');
-  //   }
-  //   return this.isEmailFilled && this.isPasswordFilled;
-  // }
-
-  // isLoginDataCorrect() {
-  //   const email: string = this.loginForm.value.email || ''
-  //   const password: string = this.loginForm.value.password || ''
-  //   if (await this.userService.isLoginDataCorrect(email,  password)) {
-  //     console.log('вход')
-  //     return true
-  //   } else {
-  //      console.log('email или пароль введены неверно')
-  //      return false
-  //   }
-  // }
 }
