@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { CreateNotePageComponent } from './create-note-page.component';
 import { InputTextModule } from 'primeng/inputtext';
 import { ButtonModule } from 'primeng/button';
-import { EditorComponent } from './components/editor/editor.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { EditorComponent } from '@shared/components/editor/editor.component';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { EditorComponent } from './components/editor/editor.component';
   imports: [
     CommonModule,
     InputTextModule,
-    ButtonModule
+    ButtonModule,
+    ReactiveFormsModule
   ],
   exports: [CreateNotePageComponent]
 })

@@ -1,10 +1,10 @@
 <div class="container">
-  <div class="create-note-form">
-    <input type="text" id="title" class="input-title" placeholder="Название" pInputText/>
-    <app-editor></app-editor>
+  <form class="create-note-form" [formGroup]="addNoteForm" (ngSubmit)="onSubmit()">
+    <input type="text" id="title" class="input-title" placeholder="Название" pInputText formControlName="title" />
+    <app-editor [blocks]="note.body.blocks"></app-editor>
     <div class="btns-wrapper">
-      <p-button label="Готово"></p-button>
+      <p-button label="Готово" type="submit"></p-button>
       <p-button label="Назад" (click)="backToNotes()"></p-button>
     </div>
-  </div>
+  </form>
 </div>
