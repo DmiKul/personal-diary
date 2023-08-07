@@ -7,6 +7,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 export class IsAuthorizedService {
 
   private isAuthorizedSubject: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  private userIdSubject: BehaviorSubject<string> = new BehaviorSubject<string>('');
 
   constructor() { }
 
@@ -16,5 +17,13 @@ export class IsAuthorizedService {
 
   getIsAuthorized(): Observable<boolean> {
     return this.isAuthorizedSubject.asObservable();
+  }
+
+  setUserId(value: string): void {
+    this.userIdSubject.next(value)
+  }
+
+  getUserId(): Observable<string> {
+    return this.userIdSubject.asObservable()
   }
 }

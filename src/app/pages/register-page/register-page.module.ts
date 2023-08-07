@@ -5,6 +5,8 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ReactiveFormsModule } from '@angular/forms';
+import { LoaderComponent } from '@shared/components/loader/loader.component';
+import { LoaderModule } from '@shared/components/loader/loader.module';
 
 
 
@@ -16,7 +18,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     ButtonModule,
     InputTextModule,
     PasswordModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    LoaderModule
   ],
   exports: [RegisterPageComponent]
 })

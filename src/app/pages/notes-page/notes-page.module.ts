@@ -6,16 +6,15 @@ import { NoteComponent } from './components/note/note.component';
 import { ImageModule } from 'primeng/image';
 import { Routes } from '@angular/router';
 import { InfiniteScrollComponent } from '@shared/components/infinite-scroll/infinite-scroll.component';
-import { LoaderComponent } from '@shared/components/loader/loader.component';
-
-const notesRoutes: Routes = [{ path: '', component: NoteComponent }]
+import { LoaderModule } from '@shared/components/loader/loader.module';
 
 @NgModule({
-  declarations: [NotesPageComponent, NoteComponent, InfiniteScrollComponent, LoaderComponent],
+  declarations: [NotesPageComponent, NoteComponent, InfiniteScrollComponent],
   imports: [
     CommonModule,
     ButtonModule,
-    ImageModule
+    ImageModule,
+    LoaderModule
   ],
   exports: [NotesPageComponent]
 })

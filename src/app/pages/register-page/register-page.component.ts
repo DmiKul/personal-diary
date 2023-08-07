@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidationErrors, ValidatorFn, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@shared/services/auth.service';
+import { emailDomainValidator } from './validators/emailDomainValidator';
 
 @Component({
   selector: 'app-register-page',
@@ -12,6 +13,7 @@ export class RegisterPageComponent {
   registerForm!: FormGroup;
   isFormSubmitted: boolean = false
   isEmailFree: boolean = true
+  isLoading!: boolean
 
   constructor(
     private fb: FormBuilder,
@@ -19,11 +21,15 @@ export class RegisterPageComponent {
     private auth: AuthService
   ) {
     this._createForm();
+    this.auth.getIsLoading().subscribe(isLoading => this.isLoading = isLoading)
+    this.auth.getIsEmailFree().subscribe(isEmailFree => {
+      this.isEmailFree = isEmailFree
+    })
   }
 
   private _createForm() {
     this.registerForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required, Validators.email, emailDomainValidator()]],
       password: ['', [Validators.required, Validators.minLength(6)]],
       passwordConfirm: ['', [Validators.required]], //validator для совпадения паролей
     }, {
@@ -36,8 +42,6 @@ export class RegisterPageComponent {
   }
 
   checkPasswords: ValidatorFn = (group: AbstractControl):  ValidationErrors | null => {
-    console.log('validator')
-    console.log(this.registerForm)
     let pass = group.get('password')?.value;
     let confirmPass = group.get('passwordConfirm')?.value
     return pass === confirmPass || confirmPass == '' ? null : { notSame: true }
@@ -60,7 +64,9 @@ export class RegisterPageComponent {
     console.log(this.registerForm);
     const email: string = this._email?.value || '';
     const password: string = this._password?.value || '';
-    this.auth.register(email, password)
+    if (this.registerForm.status == 'VALID') {
+      this.auth.register(email, password)
+    }
   }
 
   backToLogin(): void {

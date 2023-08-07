@@ -11,14 +11,13 @@ import { AuthService } from '@shared/services/auth.service';
 export class LayoutComponent {
   isAuthorized!: boolean
 
-  constructor(private router: Router, private auth: AuthService, private isAuthorizedService: IsAuthorizedService) {
-    this.isAuthorizedService.getIsAuthorized().subscribe(isAuthorized => this.isAuthorized = isAuthorized)
+  constructor(private router: Router, private auth: AuthService) {
+    this.auth.getIsAuthorized().subscribe(isAuthorized => this.isAuthorized = isAuthorized)
     console.log(this.isAuthorized)
   }
 
   logout(): void {
     this.router.navigate(['login'])
     this.auth.logout()
-    this.isAuthorizedService.setIsAuthorized(false)
   }
 }

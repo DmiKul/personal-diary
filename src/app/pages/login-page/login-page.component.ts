@@ -15,20 +15,23 @@ import { IsAuthorizedService } from 'src/app/shared/services/is-authorized.servi
 })
 export class LoginPageComponent {
   loginForm!: FormGroup;
-  isLoginDataCorrect: boolean = true
+  isLoginDataCorrect!: boolean
   isFormSubmitted: boolean = false
+  isLoading: boolean = false
 
   constructor(
     private fb: FormBuilder,
     private router: Router,
     private auth: AuthService
   ) {
+    this.auth.getIsLoading().subscribe(isLoading => this.isLoading = isLoading)
     this._createForm();
+    this.auth.getIsLoginDataCorrect().subscribe(isLoginDataCorrect => this.isLoginDataCorrect = isLoginDataCorrect)
   }
 
   private _createForm() {
     this.loginForm = this.fb.group({
-      email: ['', [Validators.required, Validators.email]],
+      email: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
     this.loginForm.valueChanges.subscribe((v) => {
@@ -45,11 +48,16 @@ export class LoginPageComponent {
     return this.loginForm.get('password')
   }
 
+  setIsLogingDataCorrect(value: boolean): void {
+    this.isLoginDataCorrect = value
+  }
+
   register(): void {
     this.router.navigate(['register']);
   }
 
   onSubmit() {
+    // this.isLoginDataCorrect = true
     this.isFormSubmitted = true
     console.log(this.loginForm);
     if (this.loginForm.status == 'VALID') {

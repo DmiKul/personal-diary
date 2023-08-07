@@ -7,6 +7,7 @@ import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { EditorComponent } from '@shared/components/editor/editor.component';
 import { NoteService } from '@shared/services/note.service';
 import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
+import { AuthService } from '@shared/services/auth.service';
 
 @Component({
   selector: 'app-create-note-page',
@@ -18,15 +19,18 @@ export class CreateNotePageComponent {
   addNoteForm!: FormGroup;
   note!: INote;
   editMode!: boolean;
+  userId!: string
 
   constructor(
     private router: Router,
     private fb: FormBuilder,
     private data: DataService,
     private sanitizer: DomSanitizer,
+    private auth: AuthService,
     // private noteBlocks: NoteBlocksService,
     private noteService: NoteService
   ) {
+    this.userId = this.auth.getUserId()
     this.noteService.getNote().subscribe((note) => {
       this.note = note;
       this.editMode = !!this.note.id;
@@ -65,11 +69,11 @@ export class CreateNotePageComponent {
             body: outputData,
           };
           if (this.editMode) {
-            this.data.updateNote(this.note.id, newNote);
+            this.data.updateNote(this.userId, this.note.id, newNote);
             // this.data.deleteNote(this.note)
             // this.data.addNote(newNote)
           } else {
-            this.data.addNote(newNote);
+            this.data.addNote(this.userId, newNote);
           }
           // this._title?.setValue('')
           this.addNoteForm.reset()
@@ -83,6 +87,7 @@ export class CreateNotePageComponent {
           }
           this.noteService.setNote(this.note)
           //todo: заметка изменена(создана) успешно
+          this.router.navigate([''])
         })
         .catch((error) => {
           console.log('Saving failed: ', error);

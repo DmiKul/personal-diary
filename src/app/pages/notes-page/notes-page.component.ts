@@ -12,6 +12,7 @@ import { combineLatest } from 'rxjs';
   styleUrls: ['./notes-page.component.less'],
 })
 export class NotesPageComponent {
+  userId!: string
   notes: INote[] = [];
   isLoading!: boolean;
   lastTimeStamp: number | undefined;
@@ -28,8 +29,9 @@ export class NotesPageComponent {
   ) {}
 
   ngOnInit(): void {
+    this.userId = this.auth.getUserId()
     this.isLoading = true;
-    this.data.getNotesCount().subscribe((res) => {
+    this.data.getNotesCount(this.userId).subscribe((res) => {
       this.allNotesCount = res;
       if (this.allNotesCount == 0) {
         this.isLoading = false;
@@ -64,7 +66,7 @@ export class NotesPageComponent {
       this.allNotesCount - this.notes.length
     );
     console.log(this.limit);
-    this.data.getLimitedNotes(this.lastNoteId, this.limit).subscribe((res) => {
+    this.data.getLimitedNotes(this.userId, this.lastNoteId, this.limit).subscribe((res) => {
       console.log(res);
       const addElemsCount = this.allNotesCount - this.notes.length
       res = res.slice(0, addElemsCount)

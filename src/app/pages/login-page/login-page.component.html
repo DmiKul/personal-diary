@@ -1,60 +1,73 @@
 <div class="container login-page__container">
-  <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-    <h2 class="title">Вход</h2>
-    <div class="email-wrapper">
-      <input
-        type="email"
-        pInputText
-        placeholder="Введите логин"
-        formControlName="email"
-        required="true"
-        [ngClass]="{
-          invalid:
-            (_email?.invalid && (_email?.touched || _email?.dirty || isFormSubmitted)) ||
-            !isLoginDataCorrect
-        }"
-      />
-      <!-- <div *ngIf="!isEmailFilled" class="invalid-message"> -->
-      <div *ngIf="_email?.invalid && (_email?.touched || _email?.dirty || isFormSubmitted)">
-        <div *ngIf="_email?.errors?.['required']" class="invalid-message">
+  <app-loader *ngIf="isLoading; else form"></app-loader>
+  <ng-template #form>
+    <form class="login-form" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+      <h2 class="title">Вход</h2>
+      <div class="email-wrapper">
+        <input
+          type="email"
+          pInputText
+          placeholder="Введите логин"
+          formControlName="email"
+          required="true"
+          [ngClass]="{
+            invalid:
+              (_email?.invalid &&
+                (_email?.touched || _email?.dirty || isFormSubmitted)) ||
+              !isLoginDataCorrect
+          }"
+        />
+        <!-- <div *ngIf="!isEmailFilled" class="invalid-message"> -->
+        <div
+          *ngIf="
+            _email?.invalid &&
+            (_email?.touched || _email?.dirty || isFormSubmitted)
+          "
+        >
+          <div *ngIf="_email?.errors?.['required']" class="invalid-message">
+            Поле не заполнено
+          </div>
+          <!-- <div *ngIf="_email?.errors?.['email']" class="invalid-message">
+            Email введен некорректно
+          </div> -->
+        </div>
+        <div *ngIf="!isLoginDataCorrect" class="invalid-message">
+          Неверный логин или пароль
+        </div>
+      </div>
+      <div class="password-wrapper">
+        <p-password
+          [toggleMask]="true"
+          [feedback]="false"
+          placeholder="Введите пароль"
+          formControlName="password"
+          required="true"
+          [ngClass]="{
+            invalid:
+              (_password?.invalid &&
+                (_password?.touched || _password?.dirty || isFormSubmitted)) ||
+              !isLoginDataCorrect
+          }"
+        ></p-password>
+        <div
+          *ngIf="
+            _password?.invalid &&
+            (_password?.touched || _password?.dirty || isFormSubmitted)
+          "
+        >
+          <div *ngIf="_password?.errors?.['required']" class="invalid-message">
+            Поле не заполнено
+          </div>
+        </div>
+        <div *ngIf="!isLoginDataCorrect" class="invalid-message">
+          Неверный логин или пароль
+        </div>
+        <!-- <div *ngIf="!isPasswordFilled" class="invalid-message">
           Поле не заполнено
-        </div>
-        <div *ngIf="_email?.errors?.['email']" class="invalid-message">
-          Email введен некорректно
-        </div>
+        </div> -->
       </div>
-      <div *ngIf="!isLoginDataCorrect" class="invalid-message">
-        Неверный логин или пароль
-      </div>
-    </div>
-    <div class="password-wrapper">
-      <p-password
-        [toggleMask]="true"
-        [feedback]="false"
-        placeholder="Введите пароль"
-        formControlName="password"
-        required="true"
-        [ngClass]="{
-          invalid:
-            (_password?.invalid && (_password?.touched || _password?.dirty || isFormSubmitted)) ||
-            !isLoginDataCorrect
-        }"
-      ></p-password>
-      <div
-        *ngIf="_password?.invalid && (_password?.touched || _password?.dirty || isFormSubmitted)"
-      >
-        <div *ngIf="_password?.errors?.['required']" class="invalid-message">
-          Поле не заполнено
-        </div>
-      </div>
-      <div *ngIf="!isLoginDataCorrect" class="invalid-message">
-        Неверный логин или пароль
-      </div>
-      <!-- <div *ngIf="!isPasswordFilled" class="invalid-message">
-        Поле не заполнено
-      </div> -->
-    </div>
-    <p-button label="Войти" type="submit"></p-button>
-    <p-button label="Зарегестрироваться" (click)="register()"></p-button>
-  </form>
+      <p-button label="Войти" type="submit"></p-button>
+      <p-button label="Зарегестрироваться" (click)="register()"></p-button>
+    </form>
+  </ng-template>
 </div>
