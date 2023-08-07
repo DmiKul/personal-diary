@@ -26,7 +26,11 @@ export class AuthService {
     private fireAuth: AngularFireAuth,
     private router: Router,
     private data: DataService
-  ) {}
+  ) {
+    if (localStorage.getItem('userId')) {
+      this.setIsAuthorized(true)
+    }
+  }
 
   login(email: string, password: string): void {
     this.setIsLoading(true)
@@ -40,9 +44,9 @@ export class AuthService {
         }
         this.setIsLoading(false)
         this.setIsLoginDataCorrect(true)
-        localStorage.setItem('token', 'true');
         this.router.navigate(['notes']);
         this.setIsAuthorized(true);
+        localStorage.setItem('userId', this.userId);
       },
       (err) => {
         this.setIsLoading(false)
@@ -84,7 +88,7 @@ export class AuthService {
   logout() {
     this.fireAuth.signOut().then(
       () => {
-        localStorage.removeItem('token');
+        localStorage.removeItem('userId');
         this.router.navigate(['login']);
         this.userId = ''
         this.setIsAuthorized(false)

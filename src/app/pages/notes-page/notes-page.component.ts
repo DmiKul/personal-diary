@@ -29,7 +29,11 @@ export class NotesPageComponent {
   ) {}
 
   ngOnInit(): void {
-    this.userId = this.auth.getUserId()
+    if (this.auth)
+    this.userId = this.auth.getUserId() || localStorage.getItem('userId') || ''
+    if (!this.userId) {
+      this.router.navigate(['login'])
+    }
     this.isLoading = true;
     this.data.getNotesCount(this.userId).subscribe((res) => {
       this.allNotesCount = res;

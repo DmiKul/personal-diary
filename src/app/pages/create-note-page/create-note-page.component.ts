@@ -31,7 +31,10 @@ export class CreateNotePageComponent {
     // private noteBlocks: NoteBlocksService,
     private noteService: NoteService
   ) {
-    this.userId = this.auth.getUserId()
+    this.userId = this.auth.getUserId() || localStorage.getItem('userId') || ''
+    if (!this.userId) {
+      this.router.navigate(['login'])
+    }
     this.noteService.getNote().subscribe((note) => {
       this.note = note;
       this.editMode = !!this.note.id;
