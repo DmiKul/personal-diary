@@ -52,7 +52,7 @@ export class NotesPageComponent {
         blocks: [],
       },
     });
-    this.router.navigate(['/create-note']);
+    this.router.navigate(['create-note']);
     // this.notesBlocks.setNoteBlocks([]);
   }
 

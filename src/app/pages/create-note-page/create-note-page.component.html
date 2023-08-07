@@ -1,7 +1,32 @@
-<div class="container">
-  <form class="create-note-form" [formGroup]="addNoteForm" (ngSubmit)="onSubmit()">
-    <input type="text" id="title" class="input-title" placeholder="Название" pInputText formControlName="title" />
+<div class="container create-note-page__container">
+  <form
+    class="create-note-form"
+    [formGroup]="addNoteForm"
+    (ngSubmit)="onSubmit()"
+  >
+    <input
+      type="text"
+      id="title"
+      class="input-title"
+      placeholder="Название"
+      pInputText
+      formControlName="title"
+    />
     <app-editor [blocks]="note.body.blocks"></app-editor>
+    <!-- <input type="file" multiple="true" accept="image/png, image/jpeg" /> -->
+    <p-fileUpload
+      [multiple]="true"
+      [maxFileSize]="1000000"
+      mode="advanced"
+      chooseLabel="Выбрать файлы"
+      uploadLabel="Загрузить"
+      cancelLabel="Отмена"
+      name="demo[]"
+      url="https://www.primefaces.org/cdn/api/upload.php"
+      accept="image/*"
+      (onUpload)="onUpload($event)"
+    ></p-fileUpload>
+    <!-- maxFileSize="1000000" -->
     <div class="btns-wrapper">
       <p-button label="Готово" type="submit"></p-button>
       <p-button label="Назад" (click)="backToNotes()"></p-button>

@@ -6,7 +6,6 @@ import {
   FacebookAuthProvider,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
-import { IsAuthorizedService } from './is-authorized.service';
 import { DataService } from './data.service';
 import { IUser } from '@customTypes/models';
 import { BehaviorSubject, Observable } from 'rxjs';
@@ -42,7 +41,7 @@ export class AuthService {
         this.setIsLoading(false)
         this.setIsLoginDataCorrect(true)
         localStorage.setItem('token', 'true');
-        this.router.navigate(['']);
+        this.router.navigate(['notes']);
         this.setIsAuthorized(true);
       },
       (err) => {
@@ -68,7 +67,7 @@ export class AuthService {
         alert('Registration Successful');
         this.setIsLoading(false)
         // this.sendEmailForVarification(res.user); //todo:  вернуться к этому позже
-        this.router.navigate(['/login']);
+        this.router.navigate(['login']);
       },
       (err) => {
         this.setIsLoading(false)
@@ -76,7 +75,7 @@ export class AuthService {
         if (err.message == 'Firebase: The email address is already in use by another account. (auth/email-already-in-use).') {
           this.setIsEmailFree(false)
         }
-        this.router.navigate(['/register']);
+        this.router.navigate(['register']);
       }
     );
   }
@@ -86,7 +85,7 @@ export class AuthService {
     this.fireAuth.signOut().then(
       () => {
         localStorage.removeItem('token');
-        this.router.navigate(['/login']);
+        this.router.navigate(['login']);
         this.userId = ''
         this.setIsAuthorized(false)
       },
@@ -134,7 +133,7 @@ export class AuthService {
   // sendEmailForVarification(user : any) { //todo: вернуться к этому позже
   //   console.log(user);
   //   user.sendEmailVerification().then((res : any) => {
-  //     this.router.navigate(['/varify-email']);
+  //     this.router.navigate(['varify-email']);
   //   }, (err : any) => {
   //     alert('Something went wrong. Not able to send mail to your email.')
   //   })

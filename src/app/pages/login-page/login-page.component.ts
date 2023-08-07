@@ -6,7 +6,6 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@shared/services/auth.service';
-import { IsAuthorizedService } from 'src/app/shared/services/is-authorized.service';
 
 @Component({
   selector: 'app-login-page',

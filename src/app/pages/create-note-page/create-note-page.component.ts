@@ -20,6 +20,7 @@ export class CreateNotePageComponent {
   note!: INote;
   editMode!: boolean;
   userId!: string
+  uploadedImage!: File
 
   constructor(
     private router: Router,
@@ -87,7 +88,7 @@ export class CreateNotePageComponent {
           }
           this.noteService.setNote(this.note)
           //todo: заметка изменена(создана) успешно
-          this.router.navigate([''])
+          this.router.navigate(['notes'])
         })
         .catch((error) => {
           console.log('Saving failed: ', error);
@@ -95,7 +96,13 @@ export class CreateNotePageComponent {
     }
   }
 
+  onUpload(event: any) {
+    console.log('upload')
+    this.uploadedImage = event.files[0]
+    console.log(this.uploadedImage)
+  }
+
   backToNotes() {
-    this.router.navigate(['']);
+    this.router.navigate(['notes']);
   }
 }

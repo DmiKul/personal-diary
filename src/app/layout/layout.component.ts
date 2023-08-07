@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { IsAuthorizedService } from '../shared/services/is-authorized.service';
 import { AuthService } from '@shared/services/auth.service';
 
 @Component({
