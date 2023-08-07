@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { INote } from '@customTypes/models';
 import { DataService } from '@shared/services/data.service';
@@ -14,6 +14,7 @@ import EditorJSHTML from 'editorjs-html';
 })
 export class NoteComponent {
   @Input() note!: INote;
+  @Output() deletedNote = new EventEmitter<string>()
   html!: any;
 
   constructor(
@@ -27,13 +28,13 @@ export class NoteComponent {
     if (this.note) {
       const editorJSHTML = new EditorJSHTML();
       this.html = editorJSHTML.parse(this.note.body);
-      console.log(this.html);
     }
   }
 
   deleteNote(): void {
-    console.log('delete');
+    console.log('delete', this.note);
     this.data.deleteNote(this.note);
+    this.deletedNote.emit(this.note.id)
   }
 
   editNote(): void {

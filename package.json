@@ -31,6 +31,7 @@
     "codex-tooltip": "^1.0.5",
     "editorjs-html": "3.3.0",
     "editorjs-inline-tool": "^0.4.0",
+    "intersection-observer": "^0.12.2",
     "marked": "^6.0.0",
     "primeicons": "^6.0.1",
     "primeng": "16.0.1",

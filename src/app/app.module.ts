@@ -14,6 +14,8 @@ import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth,getAuth } from '@angular/fire/auth';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+import { NoteService } from '@shared/services/note.service';
+import { DataService } from '@shared/services/data.service';
 
 @NgModule({
   declarations: [
@@ -24,16 +26,16 @@ import { provideFirestore,getFirestore } from '@angular/fire/firestore';
     BrowserAnimationsModule,
     AppRoutingModule,
     AngularFireModule.initializeApp(environment.firebase),
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideAuth(() => getAuth()),
+    provideFirestore(() => getFirestore()),
     LayoutModule,
     CreateNotePageModule,
     NotesPageModule,
     LoginPageModule,
     RegisterPageModule,
-    provideFirebaseApp(() => initializeApp(environment.firebase)),
-    provideAuth(() => getAuth()),
-    provideFirestore(() => getFirestore())
   ],
-  providers: [AuthService],
+  providers: [AuthService, NoteService, DataService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

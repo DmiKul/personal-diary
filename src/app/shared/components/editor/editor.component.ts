@@ -1,8 +1,9 @@
 import { Component, Input, SimpleChanges } from '@angular/core';
-import EditorJS, { BlockToolData, OutputBlockData, OutputData } from '@editorjs/editorjs';
+import EditorJS, { BlockToolData, OutputBlockData, OutputData} from '@editorjs/editorjs';
 import Header from '@editorjs/header';
 // import List from '@editorjs/list';
-import ImageTool from '@editorjs/image';
+import ImageTool, { ImageToolData} from '@editorjs/image';
+import { FileService } from '@shared/services/file.service';
 // import SimpleImage from '@editorjs/simple-image'
 // import Underline from '@editorjs/underline';
 // import Paragraph from '@editorjs/paragraph';
@@ -18,7 +19,7 @@ export class EditorComponent {
   @Input() blocks!: OutputBlockData[]
   isFocused: boolean = false;
 
-  constructor() {
+  constructor(private fileService: FileService) {
     console.log(this.blocks)
     // console.log(this.editor.data.blocks)
   }
@@ -39,15 +40,29 @@ export class EditorComponent {
         tools: {
           header: Header,
           underline: UnderlineInlineTool,
-          image: {
-            class: ImageTool,
-            config: {
-              endpoints: {
-                byFile: 'https://firebasestorage.googleapis.com/v0/b/personal-diary-cbdfa/o', // Your backend file uploader endpoint
-                byUrl: 'https://firebasestorage.googleapis.com/v0/b/personal-diary-cbdfa/o', // Your endpoint that provides uploading by Url
-              }
-            }
-          }
+          // image: {
+          //   class: ImageTool,
+          //   config: {
+              // endpoints: {
+              //   byFile: 'https://console.firebase.google.com/project/personal-diary-cbdfa/firestore/data/Upload', // Your backend file uploader endpoint
+              //   byUrl: 'https://console.firebase.google.com/project/personal-diary-cbdfa/firestore/data/Upload', // Your endpoint that provides uploading by Url
+              // },
+              // onUpload: async (image: ImageToolData) => {
+              //   console.log('upload')
+              //   const imageUrl = image.data.url
+              //   this.fileService.saveMetaDataOfFile(image)
+              // }
+              // uploader: {
+              //   uploadByFile(file) {
+              //     const formData = new FormData()
+              //     formData.append('file', file)
+              //     const reposnse = await axios.post(
+
+              //     )
+              //   }
+              // }
+            // }
+          // }
         },
         data: {
           blocks: this.blocks
