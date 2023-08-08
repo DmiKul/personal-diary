@@ -8,6 +8,7 @@
   </div>
   <div class="text-wrapper">
     <div class="block" *ngFor="let block of note.body.blocks; let i = index">
+      <!-- Выводим соответствующий элемент в зависимости от параметров блока -->
       <p *ngIf="block.type == 'paragraph'" [innerHTML]="html[i]"></p>
       <h1
         *ngIf="block.type == 'header' && block.data.level == 1"

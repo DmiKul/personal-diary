@@ -39,6 +39,7 @@ export class CreateNotePageComponent {
     this.noteService.getNote().subscribe((note) => {
       this.note = note;
       this.editMode = !!this.note.id;
+      //Создаем форму
       this._createForm();
     });
   }
@@ -57,14 +58,16 @@ export class CreateNotePageComponent {
     return this.addNoteForm.get('text');
   }
 
+  //Обрабатываем сабмит формы
   onSubmit() {
     //todo: add validation in html
     if (this.addNoteForm.status == 'VALID') {
       const title: string = this._title?.value || '';
-
+      //Сохраняем данные из editorjs
       this.editor
         .save()
         .then((outputData) => {
+          //Преобразуем файлы картинок в url
           this.getImageUrls().then(() => {
             const newNote: INote = {
               id: '',
@@ -72,12 +75,15 @@ export class CreateNotePageComponent {
               body: outputData,
               images: this.imageUrls,
             };
+            //Проверяем какой режим - редактирования или создания заметки
             if (this.editMode) {
+              //Обновляем заметку
               this.data.updateNote(this.userId, this.note.id, newNote);
             } else {
+              //Добавляем новую
               this.data.addNote(this.userId, newNote);
             }
-            // this._title?.setValue('')
+            //Делаем сброс значений формы
             this.addNoteForm.reset();
             this.images.length = 0;
             this.note = {
@@ -89,8 +95,10 @@ export class CreateNotePageComponent {
               },
               images: this.imageUrls,
             };
+            //Задаем дефолтные значения, чтобы показать, что теперь никакая заметка не редактируется
             this.noteService.setNote(this.note);
             //todo: заметка изменена(создана) успешно
+            //Переходим на страницу заметок
             this.router.navigate(['notes']);
           });
         })
@@ -98,6 +106,7 @@ export class CreateNotePageComponent {
     }
   }
 
+  //Обрабатываем событие выбора файла
   async onFilesSelect(event: any) {
     for (const file of event.files) {
       this.images.push(file);
@@ -107,6 +116,7 @@ export class CreateNotePageComponent {
   async getImageUrls() {
     for (const img of this.images) {
       const imageUrl = await this.readFileAsDataURL(img);
+      //Сохраняем полученные url
       this.imageUrls.push(imageUrl);
     }
   }
@@ -125,6 +135,7 @@ export class CreateNotePageComponent {
   }
 
   backToNotes() {
+    //Возвращаемся назад на страницу заметок
     this.router.navigate(['notes']);
   }
 }

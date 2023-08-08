@@ -23,6 +23,7 @@ import { DataService } from '@shared/services/data.service';
     BrowserModule,
     BrowserAnimationsModule,
     AppRoutingModule,
+    //Инициализируем все связанное с firebase
     AngularFireModule.initializeApp(environment.firebase),
     provideFirebaseApp(() => initializeApp(environment.firebase)),
     provideAuth(() => getAuth()),

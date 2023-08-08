@@ -19,11 +19,19 @@ export class LoginPageComponent {
     private router: Router,
     private auth: AuthService
   ) {
-    localStorage.removeItem('userId');
+    // localStorage.removeItem('userId');
+
+    //Делам выход пользователя, если он авторизован и перешел на этот url
+    if (localStorage.getItem('userId')) {
+      this.auth.logout()
+    }
+    //Подписываеся на Observable, чтобы следить за изменениями isLoading
     this.auth
       .getIsLoading()
       .subscribe((isLoading) => (this.isLoading = isLoading));
+    //Создаем форму
     this._createForm();
+    //Подписываеся на Observable, чтобы следить за изменениями isLoginDataCorrect
     this.auth
       .getIsLoginDataCorrect()
       .subscribe(
@@ -36,8 +44,9 @@ export class LoginPageComponent {
       email: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
+    //Следим за изменениями значений формы
     this.loginForm.valueChanges.subscribe((v) => {
-      this.isLoginDataCorrect = true;
+      this.isLoginDataCorrect = true; //убираем валидацию правильного логина и пароля при вводе значений
       this.isFormSubmitted = false;
     });
   }
@@ -55,15 +64,18 @@ export class LoginPageComponent {
   }
 
   register(): void {
+    //Переходим на страницу регистрации
     this.router.navigate(['register']);
   }
 
+  //Обрабатываем сабмит формы
   onSubmit() {
     this.isFormSubmitted = true;
-    console.log(this.loginForm);
+    //Проверяем валидность
     if (this.loginForm.status == 'VALID') {
       const email: string = this._email?.value || '';
       const password: string = this._password?.value || '';
+      //Осуществляем вход
       this.auth.login(email, password);
     }
   }

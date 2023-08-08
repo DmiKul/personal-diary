@@ -1,4 +1,5 @@
 export const environment = {
+    //Данные о проекте в  firebase
   firebase: {
     apiKey: "AIzaSyB3ht7BusXtSoJ3R48zsa-2gJNl0z6jlEg",
     authDomain: "personal-diary-cbdfa.firebaseapp.com",

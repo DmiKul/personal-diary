@@ -27,11 +27,14 @@ export class RegisterPageComponent {
     private router: Router,
     private auth: AuthService
   ) {
+    //Создаем форму
     this._createForm();
+    //Следим за измененями isLoading
     this.auth
       .getIsLoading()
       .subscribe((isLoading) => (this.isLoading = isLoading));
     this.auth.getIsEmailFree().subscribe((isEmailFree) => {
+      //Обновляем информацию, свободен ли введенный email
       this.isEmailFree = isEmailFree;
     });
   }
@@ -41,17 +44,19 @@ export class RegisterPageComponent {
       {
         email: [
           '',
-          [Validators.required, Validators.email, emailDomainValidator()],
+          [Validators.required, Validators.email, emailDomainValidator()], //используем также кастомный валидатор
         ],
         password: ['', [Validators.required, Validators.minLength(6)]],
-        passwordConfirm: ['', [Validators.required]], //validator для совпадения паролей
+        passwordConfirm: ['', [Validators.required]],
       },
       {
-        validators: [this.checkPasswords],
+        validators: [this.checkPasswords], //используем кастомный валидатор для проверки совпадения паролей
       }
     );
+    //Следим за изменением значений формы
     this.registerForm.valueChanges.subscribe((v) => {
       this.isFormSubmitted = false;
+      //При вводе данных перестаем отображать валидацию о занятом email
       this.isEmailFree = true;
     });
   }
@@ -61,6 +66,7 @@ export class RegisterPageComponent {
   ): ValidationErrors | null => {
     let pass = group.get('password')?.value;
     let confirmPass = group.get('passwordConfirm')?.value;
+    //Если пароли не совпадают добавляем ошибку notSame
     return pass === confirmPass || confirmPass == '' ? null : { notSame: true };
   };
 
@@ -76,17 +82,19 @@ export class RegisterPageComponent {
     return this.registerForm.get('passwordConfirm');
   }
 
+  //Обрабатываем сабмит формы
   onSubmit() {
     this.isFormSubmitted = true;
-    console.log(this.registerForm);
     const email: string = this._email?.value || '';
     const password: string = this._password?.value || '';
     if (this.registerForm.status == 'VALID') {
+      //Если форма валидна, осуществляем регистрацию
       this.auth.register(email, password);
     }
   }
 
   backToLogin(): void {
+    //Возвращаемся назад к странице входа
     this.router.navigate(['login']);
   }
 }

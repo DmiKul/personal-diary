@@ -5,8 +5,9 @@ import { CreateNotePageComponent } from './pages/create-note-page/create-note-pa
 import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 
+//Настраиваем маршрутизацию
 const routes: Routes = [
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' }, //переход на страницу входа при url ''
   {
     path: 'create-note',
     component: CreateNotePageComponent,

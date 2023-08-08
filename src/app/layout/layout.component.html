@@ -1,6 +1,7 @@
 <header>
   <div class="container header__container">
     <h1 class="title">Personal Diary</h1>
+    <!-- Если пользователь авторизован, отоброжаем блок для выхода -->
     <div *ngIf="isAuthorized" class="log-out" (click)="logout()">
       <p>Выйти</p>
       <i class="pi pi-sign-out" style="font-size: 1.5rem"></i>

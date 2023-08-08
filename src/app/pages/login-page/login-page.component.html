@@ -10,7 +10,7 @@
           placeholder="Введите логин"
           formControlName="email"
           required="true"
-          [ngClass]="{
+          [ngClass]="{ 
             invalid:
               (_email?.invalid &&
                 (_email?.touched || _email?.dirty || isFormSubmitted)) ||

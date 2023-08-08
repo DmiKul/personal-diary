@@ -1,6 +1,5 @@
 import { AbstractControl, ValidatorFn } from '@angular/forms';
 
-// Функция валидатора
 export function emailDomainValidator(): ValidatorFn {
   return (control: AbstractControl): { [key: string]: any } | null => {
     // Получаем значение из контрола

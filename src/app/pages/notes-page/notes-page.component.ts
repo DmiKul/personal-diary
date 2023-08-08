@@ -18,7 +18,7 @@ export class NotesPageComponent {
   lastNoteId: string | undefined;
   notesPerPage: number = 3;
   limit!: number;
-  allNotesCount!: number;
+  allNotesCount!: number; //количество всех существующих заметок пользователя
   constructor(
     private router: Router,
     private auth: AuthService,
@@ -27,18 +27,24 @@ export class NotesPageComponent {
   ) {}
 
   ngOnInit(): void {
+    //Получаем id польлзователя
     if (this.auth)
       this.userId =
         this.auth.getUserId() || localStorage.getItem('userId') || '';
+    //Если нет id пользователя, переходим на вход
     if (!this.userId) {
       this.router.navigate(['login']);
     }
+    //Начинаем заргрузку
     this.isLoading = true;
+    //Получаем количество заметок
     this.data.getNotesCount(this.userId).subscribe((res) => {
       this.allNotesCount = res;
       if (this.allNotesCount == 0) {
+        //Заканчиуваем загрузку, если нет заметок
         this.isLoading = false;
       }
+      //Получаем заметки
       this.getNotes();
     });
   }
@@ -57,10 +63,13 @@ export class NotesPageComponent {
   }
 
   getNotes() {
+    //Если их нет или они все уже получены, не делаем запрос
     if (!this.allNotesCount || this.notes.length == this.allNotesCount) {
       return;
     }
+    //Начинаем загрузку
     this.isLoading = true;
+    //ВЫсчитываем, сколько заметок нужно в этой порции
     this.limit = Math.min(
       this.notesPerPage,
       this.allNotesCount - this.notes.length
@@ -68,16 +77,22 @@ export class NotesPageComponent {
     this.data
       .getLimitedNotes(this.userId, this.lastNoteId, this.limit)
       .subscribe((res) => {
-        const addElemsCount = this.allNotesCount - this.notes.length;
-        res = res.slice(0, addElemsCount);
+        // const addElemsCount = this.allNotesCount - this.notes.length;
+        // res = res.slice(0, addElemsCount);
+
+        //Добавляем порцию заметок
         this.notes = this.notes.concat(res);
+        //Сохраняем id последней полученной заметки
         this.lastNoteId = this.notes[this.notes.length - 1].id;
+        //Заканчиваем загрузку
         this.isLoading = false;
       });
   }
 
   deleteNote(id: string): void {
+    //убираем удаленную заметку из массива
     this.notes = this.notes.filter((elem) => elem.id !== id);
+    //Уменьшаем количество всех заметок
     --this.allNotesCount;
   }
 }

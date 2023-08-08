@@ -1,4 +1,5 @@
 export const environment = {
+  //Данные о проекте в  firebase
   firebase: {
     projectId: 'personal-diary-cbdfa',
     appId: '1:94889755691:web:8c54dfe0831f7af90e166e',
