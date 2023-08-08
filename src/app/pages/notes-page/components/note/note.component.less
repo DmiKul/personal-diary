@@ -1,29 +1,35 @@
-@gap: 10px;
 .note {
   background: #c8d0f3;
   padding: 10px;
   border-radius: var(--border-radius);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 .header {
   display: flex;
   justify-content: space-between;
-  margin-bottom: @gap;
 }
-.text-image-wrapper {
+.text-wrapper, .images-wrapper {
+  width: 100%;
+  text-align: center;
+}
+.images-wrapper {
   display: flex;
-  // gap: @gap;
-  justify-content: space-between;
-  // margin-bottom: @gap;
+  justify-content: center;
+  gap: 10px;
 }
-.text-wrapper {
-  width: 80%;
+:host ::ng-deep .p-image-preview-indicator, :host ::ng-deep .p-image-preview-container, :host ::ng-deep img {
+  border-radius: var(--border-radius);
 }
-.image {
-  width: 15%;
+:host ::ng-deep .p-image-preview {
+  max-width: 90vw;
+  max-height: 90vh;
 }
+
 .btns-wrapper {
   display: flex;
-  gap: @gap;
+  gap: 10px;
   justify-content: end;
 }
 

@@ -55,6 +55,7 @@ export class NotesPageComponent {
         time: 0,
         blocks: [],
       },
+      images: []
     });
     this.router.navigate(['create-note']);
     // this.notesBlocks.setNoteBlocks([]);

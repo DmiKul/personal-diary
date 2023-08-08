@@ -23,6 +23,7 @@ export class LoginPageComponent {
     private router: Router,
     private auth: AuthService
   ) {
+    localStorage.removeItem('userId')
     this.auth.getIsLoading().subscribe(isLoading => this.isLoading = isLoading)
     this._createForm();
     this.auth.getIsLoginDataCorrect().subscribe(isLoginDataCorrect => this.isLoginDataCorrect = isLoginDataCorrect)
