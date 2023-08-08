@@ -64,7 +64,7 @@ export class NotesPageComponent {
 
   getNotes() {
     //Если их нет или они все уже получены, не делаем запрос
-    if (!this.allNotesCount || this.notes.length == this.allNotesCount) {
+    if (!this.allNotesCount || this.notes.length >= this.allNotesCount) {
       return;
     }
     //Начинаем загрузку
