@@ -1,28 +1,47 @@
 <div class="note">
-    <div class="header">
-    <h2 class="title">{{note.title}}</h2>
+  <div class="header">
+    <h2 class="title">{{ note.title }}</h2>
     <div class="btns-wrapper">
       <p-button icon="pi pi-file-edit" label="" (click)="editNote()"></p-button>
       <p-button icon="pi pi-trash" label="" (click)="deleteNote()"></p-button>
     </div>
   </div>
-  <!-- <div class="text-image-wrapper"> -->
-    <div class="text-wrapper">
-      <!-- <div class="block" *ngFor="let block of note.body.blocks" [innerHTML]="block"></div> -->
-      <div class="block" *ngFor="let block of note.body.blocks; let i = index;">
-        <p *ngIf="block.type == 'paragraph'" [innerHTML]="html[i]"></p>
-        <h1 *ngIf="block.type == 'header' && block.data.level == 1" [innerHTML]="html[i]"></h1>
-        <h2 *ngIf="block.type == 'header' && block.data.level == 2" [innerHTML]="html[i]"></h2>
-        <h3 *ngIf="block.type == 'header' && block.data.level == 3" [innerHTML]="html[i]"></h3>
-        <h4 *ngIf="block.type == 'header' && block.data.level == 4" [innerHTML]="html[i]"></h4>
-        <h5 *ngIf="block.type == 'header' && block.data.level == 5" [innerHTML]="html[i]"></h5>
-        <h6 *ngIf="block.type == 'header' && block.data.level == 6" [innerHTML]="html[i]"></h6>
-      </div>
+  <div class="text-wrapper">
+    <div class="block" *ngFor="let block of note.body.blocks; let i = index">
+      <p *ngIf="block.type == 'paragraph'" [innerHTML]="html[i]"></p>
+      <h1
+        *ngIf="block.type == 'header' && block.data.level == 1"
+        [innerHTML]="html[i]"
+      ></h1>
+      <h2
+        *ngIf="block.type == 'header' && block.data.level == 2"
+        [innerHTML]="html[i]"
+      ></h2>
+      <h3
+        *ngIf="block.type == 'header' && block.data.level == 3"
+        [innerHTML]="html[i]"
+      ></h3>
+      <h4
+        *ngIf="block.type == 'header' && block.data.level == 4"
+        [innerHTML]="html[i]"
+      ></h4>
+      <h5
+        *ngIf="block.type == 'header' && block.data.level == 5"
+        [innerHTML]="html[i]"
+      ></h5>
+      <h6
+        *ngIf="block.type == 'header' && block.data.level == 6"
+        [innerHTML]="html[i]"
+      ></h6>
     </div>
-    <!-- <img class="image" src="https://fakeimg.pl/200x200/?text=Hello" alt=""> -->
-    <div class="images-wrapper">
-        <p-image *ngFor="let img of note.images" [src]="img" alt="Image" height="150" [preview]="true"></p-image>
-    </div>
-    <!-- <p-image src="https://primefaces.org/cdn/primeng/images/galleria/galleria1.jpg" alt="Image" width="250" [preview]="true"></p-image> -->
-  <!-- </div> -->
+  </div>
+  <div class="images-wrapper">
+    <p-image
+      *ngFor="let img of note.images"
+      [src]="img"
+      alt="Image"
+      height="150"
+      [preview]="true"
+    ></p-image>
+  </div>
 </div>

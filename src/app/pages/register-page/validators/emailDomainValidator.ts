@@ -15,7 +15,11 @@ export function emailDomainValidator(): ValidatorFn {
       const domain = parts[1];
 
       // Проверяем, что доменное имя соответствует разрешенным значениям
-      if (domain !== 'gmail.com' && domain !== 'mail.ru' && domain !== 'yandex.ru') {
+      if (
+        domain !== 'gmail.com' &&
+        domain !== 'mail.ru' &&
+        domain !== 'yandex.ru'
+      ) {
         // Возвращаем ошибку, если доменное имя не соответствует разрешенным значениям
         return { invalidDomain: true };
       }

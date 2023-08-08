@@ -13,7 +13,6 @@
       formControlName="title"
     />
     <app-editor [blocks]="note.body.blocks"></app-editor>
-    <!-- <input type="file" multiple="true" accept="image/png, image/jpeg" /> -->
     <p-fileUpload
       [maxFileSize]="1000000"
       mode="advanced"
@@ -27,7 +26,6 @@
       accept="image/*"
       (onSelect)="onFilesSelect($event)"
     ></p-fileUpload>
-    <!-- maxFileSize="1000000" -->
     <div class="btns-wrapper">
       <p-button label="Готово" type="submit"></p-button>
       <p-button label="Назад" (click)="backToNotes()"></p-button>

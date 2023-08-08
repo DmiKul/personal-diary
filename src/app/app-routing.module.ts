@@ -7,7 +7,11 @@ import { RegisterPageComponent } from './pages/register-page/register-page.compo
 
 const routes: Routes = [
   { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'create-note', component: CreateNotePageComponent, title: 'Создание записи' },
+  {
+    path: 'create-note',
+    component: CreateNotePageComponent,
+    title: 'Создание записи',
+  },
   { path: 'notes', component: NotesPageComponent, title: 'Записи' },
   { path: 'login', component: LoginPageComponent, title: 'Вход' },
   { path: 'register', component: RegisterPageComponent, title: 'Регистрация' },
@@ -15,6 +19,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

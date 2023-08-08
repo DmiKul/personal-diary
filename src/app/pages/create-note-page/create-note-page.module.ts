@@ -7,7 +7,6 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { EditorComponent } from '@shared/components/editor/editor.component';
 import { FileUploadModule } from 'primeng/fileupload';
 
-
 @NgModule({
   declarations: [CreateNotePageComponent, EditorComponent],
   imports: [
@@ -15,8 +14,8 @@ import { FileUploadModule } from 'primeng/fileupload';
     InputTextModule,
     ButtonModule,
     ReactiveFormsModule,
-    FileUploadModule
+    FileUploadModule,
   ],
-  exports: [CreateNotePageComponent]
+  exports: [CreateNotePageComponent],
 })
-export class CreateNotePageModule { }
+export class CreateNotePageModule {}

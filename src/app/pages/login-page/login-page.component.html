@@ -17,7 +17,6 @@
               !isLoginDataCorrect
           }"
         />
-        <!-- <div *ngIf="!isEmailFilled" class="invalid-message"> -->
         <div
           *ngIf="
             _email?.invalid &&
@@ -27,9 +26,6 @@
           <div *ngIf="_email?.errors?.['required']" class="invalid-message">
             Поле не заполнено
           </div>
-          <!-- <div *ngIf="_email?.errors?.['email']" class="invalid-message">
-            Email введен некорректно
-          </div> -->
         </div>
         <div *ngIf="!isLoginDataCorrect" class="invalid-message">
           Неверный логин или пароль
@@ -62,9 +58,6 @@
         <div *ngIf="!isLoginDataCorrect" class="invalid-message">
           Неверный логин или пароль
         </div>
-        <!-- <div *ngIf="!isPasswordFilled" class="invalid-message">
-          Поле не заполнено
-        </div> -->
       </div>
       <p-button label="Войти" type="submit"></p-button>
       <p-button label="Зарегестрироваться" (click)="register()"></p-button>

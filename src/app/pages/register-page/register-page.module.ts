@@ -5,11 +5,7 @@ import { ButtonModule } from 'primeng/button';
 import { InputTextModule } from 'primeng/inputtext';
 import { PasswordModule } from 'primeng/password';
 import { ReactiveFormsModule } from '@angular/forms';
-import { LoaderComponent } from '@shared/components/loader/loader.component';
 import { LoaderModule } from '@shared/components/loader/loader.module';
-
-
-
 
 @NgModule({
   declarations: [RegisterPageComponent],
@@ -19,8 +15,8 @@ import { LoaderModule } from '@shared/components/loader/loader.module';
     InputTextModule,
     PasswordModule,
     ReactiveFormsModule,
-    LoaderModule
+    LoaderModule,
   ],
-  exports: [RegisterPageComponent]
+  exports: [RegisterPageComponent],
 })
-export class RegisterPageModule { }
+export class RegisterPageModule {}

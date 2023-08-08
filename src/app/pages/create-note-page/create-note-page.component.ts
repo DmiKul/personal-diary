@@ -6,15 +6,8 @@ import { DataService } from '@shared/services/data.service';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 import { EditorComponent } from '@shared/components/editor/editor.component';
 import { NoteService } from '@shared/services/note.service';
-import { ColdObservable } from 'rxjs/internal/testing/ColdObservable';
 import { AuthService } from '@shared/services/auth.service';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
-import {
-  StorageReference,
-  getStorage,
-  ref,
-  uploadBytes,
-} from '@angular/fire/storage';
 
 @Component({
   selector: 'app-create-note-page',
@@ -36,7 +29,6 @@ export class CreateNotePageComponent {
     private data: DataService,
     private sanitizer: DomSanitizer,
     private auth: AuthService,
-    // private noteBlocks: NoteBlocksService,
     private noteService: NoteService,
     private storage: AngularFireStorage
   ) {
@@ -66,8 +58,6 @@ export class CreateNotePageComponent {
   }
 
   onSubmit() {
-    // this.isFormSubmitted = true
-    console.log(this.addNoteForm);
     //todo: add validation in html
     if (this.addNoteForm.status == 'VALID') {
       const title: string = this._title?.value || '';
@@ -75,9 +65,7 @@ export class CreateNotePageComponent {
       this.editor
         .save()
         .then((outputData) => {
-          // this.uploadFile(this.images);
           this.getImageUrls().then(() => {
-            console.log(this.imageUrls);
             const newNote: INote = {
               id: '',
               title: title,
@@ -86,8 +74,6 @@ export class CreateNotePageComponent {
             };
             if (this.editMode) {
               this.data.updateNote(this.userId, this.note.id, newNote);
-              // this.data.deleteNote(this.note)
-              // this.data.addNote(newNote)
             } else {
               this.data.addNote(this.userId, newNote);
             }
@@ -108,29 +94,14 @@ export class CreateNotePageComponent {
             this.router.navigate(['notes']);
           });
         })
-        .catch((error) => {
-          console.log('Saving failed: ', error);
-        });
+        .catch((error) => {});
     }
   }
 
-  // onUpload(event: any) {
-  //   console.log('upload')
-  //   const reader = new FileReader();
-  //   event.files.forEach((file: any) => {
-  //     reader.readAsDataURL(file);
-  //     const imageUrl: string = reader.result as string
-  //     this.images.push(imageUrl)
-  //   });
-  //   console.log(this.images)
-  // }
-
   async onFilesSelect(event: any) {
-    console.log('upload');
     for (const file of event.files) {
       this.images.push(file);
     }
-    console.log(this.images);
   }
 
   async getImageUrls() {
@@ -152,45 +123,6 @@ export class CreateNotePageComponent {
       reader.readAsDataURL(file);
     });
   }
-
-  // onFileSelect(event: any): void {
-  //   console.log('file select');
-  //   console.log(event);
-  // }
-
-  // uploadFile(files: File[]): void {
-  //   // var storageRef = storage.refFromURL("gs://nameofapp.appspot.com/armonii_culturale.png").getDownloadURL().then(function(url)
-
-  //   files.forEach((file) => {
-  //     const storage = getStorage()
-  //     const storageRef = ref(storage, file.name);
-  //     console.log(storage)
-  //     uploadBytes(storageRef, file).then((snapshot) => {
-  //       console.log('Uploaded a file!');
-  //     });
-  //     this.imageUrls.push(storageRef)
-
-  //     // const filePath = `gs://personal-diary-cbdfa.appspot.com/${file.name}`;
-  //     // const fileRef = this.storage.refFromURL(filePath);
-  //     // const task = this.storage.upload(filePath, file);
-
-  //     // // Добавьте обработчики для отслеживания прогресса загрузки, если необходимо
-  //     // // task.percentageChanges().subscribe((percentage) => { /* Handle progress */ });
-
-  //     // task.snapshotChanges().subscribe(
-  //     //   (snapshot) => {
-  //     //     // Файл успешно загружен, теперь сохраняем ссылку на файл в Firestore
-  //     //     if (snapshot?.state === 'success') {
-  //     //       fileRef.getDownloadURL().subscribe(fileRef => this.images.push(fileRef)) //todo: check it
-  //     //       // Здесь вы можете вызвать функцию сохранения ссылки в Firestore
-  //     //     }
-  //     //   },
-  //     //   (error) => {
-  //     //     // Обработка ошибок загрузки файла
-  //     //   }
-  //     // );
-  //   });
-  // }
 
   backToNotes() {
     this.router.navigate(['notes']);

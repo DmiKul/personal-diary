@@ -31,7 +31,10 @@
           <div *ngIf="_email?.errors?.['required']" class="invalid-message">
             Поле не заполнено
           </div>
-          <div *ngIf="_email?.errors?.['email'] || _email?.errors?.['invalidDomain']" class="invalid-message">
+          <div
+            *ngIf="_email?.errors?.['email'] || _email?.errors?.['invalidDomain']"
+            class="invalid-message"
+          >
             Email введен некорректно
           </div>
           <div

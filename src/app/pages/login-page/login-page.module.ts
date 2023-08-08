@@ -15,8 +15,8 @@ import { LoaderModule } from '@shared/components/loader/loader.module';
     InputTextModule,
     PasswordModule,
     ReactiveFormsModule,
-    LoaderModule
+    LoaderModule,
   ],
-  exports: [LoginPageComponent]
+  exports: [LoginPageComponent],
 })
-export class LoginPageModule { }
+export class LoginPageModule {}

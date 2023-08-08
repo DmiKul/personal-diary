@@ -13,7 +13,7 @@ export class NoteService {
       time: 0,
       blocks: [],
     },
-    images: []
+    images: [],
   });
 
   constructor() {}
