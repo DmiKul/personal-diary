@@ -40,10 +40,7 @@ export class NotesPageComponent {
     //Получаем количество заметок
     this.data.getNotesCount(this.userId).subscribe((res) => {
       this.allNotesCount = res;
-      if (this.allNotesCount == 0) {
-        //Заканчиуваем загрузку, если нет заметок
-        this.isLoading = false;
-      }
+      this.isLoading = false;
       //Получаем заметки
       this.getNotes();
     });
@@ -63,8 +60,8 @@ export class NotesPageComponent {
   }
 
   getNotes() {
-    //Если их нет или они все уже получены, не делаем запрос
-    if (!this.allNotesCount || this.notes.length >= this.allNotesCount) {
+    //Если их нет или они все уже получены или уже идет загрузка, не делаем запрос
+    if (!this.allNotesCount || this.notes.length >= this.allNotesCount || this.isLoading) {
       return;
     }
     //Начинаем загрузку
@@ -74,6 +71,7 @@ export class NotesPageComponent {
       this.notesPerPage,
       this.allNotesCount - this.notes.length
     );
+    console.log(this.limit)
     this.data
       .getLimitedNotes(this.userId, this.lastNoteId, this.limit)
       .subscribe((res) => {
@@ -82,6 +80,7 @@ export class NotesPageComponent {
 
         //Добавляем порцию заметок
         this.notes = this.notes.concat(res);
+        console.log(this.notes)
         //Сохраняем id последней полученной заметки
         this.lastNoteId = this.notes[this.notes.length - 1].id;
         //Заканчиваем загрузку
