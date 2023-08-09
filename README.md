@@ -1,6 +1,6 @@
 # PersonalDiary
 
-## Устанавливаем все заивимости
+## Устанавливаем все зависимости
 
 `yarn install`
 
@@ -15,6 +15,7 @@
 
 ### Внести следующие изменения
 ![Alt text](src/assets/images/image-2.png)
+
 ## Тестовые пользователи
 
 Email: user1@gmail.com  
