@@ -1,4 +1,4 @@
-# PersonalDiary - проект для управления заметками
+# PersonalDiary
 
 ## Устанавливаем все заивимости
 
@@ -7,7 +7,15 @@
 ## Запускаем проект
 `yarn run start`
 
-### Тестовые пользователи
+### При возникновении такой ошибки
+![Alt text](src/assets/images/image.png)
+
+### Перейти в node_modules/@angular/fire/compat/firestore/interfaces.d.ts
+![Alt text](src/assets/images/image-1.png)
+
+### Внести следующие изменения
+![Alt text](src/assets/images/image-2.png)
+## Тестовые пользователи
 
 Email: user1@gmail.com  
 Пароль: ldkngniouh3474tb  
